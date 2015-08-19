@@ -12,6 +12,7 @@ atm.setup = function() {
   atm.sdButton = $('#deposit2').on('click', atm.savingsAccDeposit);
   atm.cwButton = $('#withdraw1').on('click', atm.currentAccWithdraw);
   atm.swButton = $('#withdraw2').on('click', atm.savingsAccWithdraw);
+  atm.checkCss();
 }
 
 atm.currentAccDeposit = function() {
@@ -21,6 +22,7 @@ atm.currentAccDeposit = function() {
     $('#balance1').text('$' + atm.currentAccBalance);
   }
   $('#amount1').val('');
+  atm.checkCss();
 }
 
 atm.savingsAccDeposit = function() {
@@ -30,6 +32,7 @@ atm.savingsAccDeposit = function() {
     $('#balance2').text('$' + atm.savingsAccBalance);
   }
   $('#amount2').val('');
+  atm.checkCss();
 }
 
 atm.currentAccWithdraw = function() {
@@ -48,6 +51,7 @@ atm.currentAccWithdraw = function() {
     }
   }
   $('#amount1').val('');
+  atm.checkCss();
 }
 
 atm.savingsAccWithdraw = function() {
@@ -59,24 +63,20 @@ atm.savingsAccWithdraw = function() {
     }
   }
   $('#amount2').val('');
+  atm.checkCss();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+atm.checkCss = function(account) {
+  //div class = account.  current account div id = account1.  savings = account2
+  console.log('hotpink');
+  if (atm.currentAccBalance === 0 ) {
+    $('.account#account1').css('background-color', 'hotpink');
+  } else {
+    $('.account#account1').css('background-color', '#6C9A74');
+  }
+  if (atm.savingsAccBalance === 0 ) {
+    $('.account#account2').css('background-color', 'hotpink');
+  } else {
+    $('.account#account2').css('background-color', '#6C9A74');
+  }
+}
