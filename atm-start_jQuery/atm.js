@@ -24,13 +24,59 @@ atm.currentAccDeposit = function() {
 }
 
 atm.savingsAccDeposit = function() {
-  console.log($(this).attr('id') + " - no action defined");
+  atm.savingsAmount = parseInt($('#amount2').val());
+  if (!isNaN(atm.savingsAmount)) {
+    atm.savingsAccBalance = atm.savingsAccBalance + atm.savingsAmount;
+    $('#balance2').text('$' + atm.savingsAccBalance);
+  }
+  $('#amount2').val('');
 }
 
 atm.currentAccWithdraw = function() {
-  console.log($(this).attr('id') + " - no action defined");
+  atm.currentAmount = parseInt($('#amount1').val());
+  if (!isNaN(atm.currentAmount)) {
+    if((atm.currentAccBalance + atm.savingsAccBalance) - atm.currentAmount >= 0) {
+      atm.accountDiff = atm.currentAmount - atm.currentAccBalance;
+      atm.accountDiff < 0 ? atm.accountDiff = 0 : null;
+      atm.currentAccBalance = atm.currentAccBalance - (atm.currentAmount - atm.accountDiff);
+      console.log('current withdraw amount: ' + atm.currentAmount);
+      console.log('diff: ' + atm.accountDiff);
+      console.log('amount taken from current: ' + (atm.currentAmount - atm.accountDiff));
+      atm.savingsAccBalance = atm.savingsAccBalance - atm.accountDiff;
+      $('#balance1').text('$' + atm.currentAccBalance);
+      $('#balance2').text('$' + atm.savingsAccBalance);
+    }
+  }
+  $('#amount1').val('');
 }
 
 atm.savingsAccWithdraw = function() {
-  console.log($(this).attr('id') + " - no action defined");
+  atm.savingsAmount = parseInt($('#amount2').val());
+  if (!isNaN(atm.savingsAmount)) {
+    if (atm.savingsAccBalance - atm.savingsAmount >= 0) {
+      atm.savingsAccBalance = atm.savingsAccBalance - atm.savingsAmount;
+      $('#balance2').text('$' + atm.savingsAccBalance);
+    }
+  }
+  $('#amount2').val('');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
