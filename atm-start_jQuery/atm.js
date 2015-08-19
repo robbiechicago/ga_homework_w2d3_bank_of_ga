@@ -1,9 +1,7 @@
 console.log('ready to go, RoHo');
 var atm = {};   
-atm.currentAccBalance = 3;
-console.log(atm.currentAccBalance);
-atm.savingsAccBalance = $('#balance2').html;
-
+atm.currentAccBalance = 0;
+atm.savingsAccBalance = 0;
 
 $(document).ready(function() {
   atm.setup();  
@@ -17,11 +15,12 @@ atm.setup = function() {
 }
 
 atm.currentAccDeposit = function() {
-  console.log($(this).attr('id') + " - no action defined");
   atm.currentAmount = parseInt($('#amount1').val());
-  console.log(atm.currentAmount);
-  atm.currentAccBalance = atm.currentAccBalance + atm.currentAmount;
-  $('#balance1').text(atm.currentAccBalance);
+  if (!isNaN(atm.currentAmount)) {
+    atm.currentAccBalance = atm.currentAccBalance + atm.currentAmount;
+    $('#balance1').text('$' + atm.currentAccBalance);
+  }
+  $('#amount1').val('');
 }
 
 atm.savingsAccDeposit = function() {
